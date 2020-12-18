@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import yelpKey from '../API/yelp';
 
-const useResults = () => {
+export default () => {
     const [results, setResults] = useState([]);
     const [errormssg, setErrormssg] = useState('');
 
@@ -11,7 +11,7 @@ const useResults = () => {
             const res = await yelpKey.get('/search', {
                 params: {
                     limit: 50,
-                    search: searchTerm,
+                    term: searchTerm,
                     location: 'orlando'
                 }
             });
@@ -22,7 +22,7 @@ const useResults = () => {
             setErrormssg('Error with yelp API call');
         };
     };
-    
+
     //initial state rendering
     useEffect(() => {
         yelpApi('pasta');
@@ -31,5 +31,4 @@ const useResults = () => {
     return [yelpApi, results, errormssg];
 };
 
-export default useResults;
 
